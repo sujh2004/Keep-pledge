@@ -1,0 +1,21 @@
+server:
+  address: ":8080"
+database:
+  host: "127.0.0.1"
+  port: 3306
+  username: "keep_pledge"
+  password: "keep_pledge"
+  name: "keep_pledge"
+  charset: "utf8mb4"
+redis:
+  address: "127.0.0.1:6379"
+  password: ""
+  db: 0
+jwt:
+  secret: "change-me-in-production"
+  access_token_ttl: "2h"
+  refresh_token_ttl: "168h"
+upload:
+  dir: "uploads"
+  public_path: "/uploads"
+  max_size_mb: 5

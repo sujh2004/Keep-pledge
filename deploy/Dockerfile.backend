@@ -1,0 +1,23 @@
+FROM golang:1.22-alpine AS build
+
+WORKDIR /src/backend
+RUN apk add --no-cache git
+ENV GOPROXY=https://goproxy.cn,direct
+
+COPY backend/go.mod backend/go.sum ./
+RUN go mod download
+
+COPY backend/ ./
+RUN go build -o /out/keep-pledge ./cmd/server
+
+FROM alpine:3.20
+
+WORKDIR /app
+RUN adduser -D -H appuser
+COPY --from=build /out/keep-pledge /app/keep-pledge
+COPY backend/config.yaml /app/config.yaml
+RUN mkdir -p /app/uploads && chown -R appuser:appuser /app
+
+USER appuser
+EXPOSE 8080
+CMD ["/app/keep-pledge"]

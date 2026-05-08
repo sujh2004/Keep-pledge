@@ -1,0 +1,13 @@
+import { useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+
+export default function CheckInPage() {
+  const { id } = useParams<{ id: string }>()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    navigate(`/challenge/${id}`, { replace: true })
+  }, [id, navigate])
+
+  return null
+}
