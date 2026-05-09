@@ -17,7 +17,9 @@ jobs:
           host: ${{ secrets.ECS_HOST }}
           username: ${{ secrets.ECS_USER }}
           key: ${{ secrets.ECS_SSH_KEY }}
+          script_stop: true
           script: |
+            set -e
             cd /opt/Keep-pledge
             git pull
             cd deploy
