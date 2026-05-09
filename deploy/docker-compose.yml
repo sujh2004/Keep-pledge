@@ -3,8 +3,8 @@ services:
     build:
       context: ..
       dockerfile: deploy/Dockerfile.backend
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     environment:
       SERVER_ADDRESS: ":8080"
       DB_HOST: mysql
@@ -12,7 +12,7 @@ services:
       DB_PASSWORD: keep_pledge
       DB_NAME: keep_pledge
       REDIS_ADDR: redis:6379
-      JWT_SECRET: "replace-with-a-long-random-secret"
+      JWT_SECRET: "pn6AIMYCucGkXTlwftUz3LSy7o4vge1H8OqZmEJQsPiaK9W2hBNxrd0RbFDjV5"
     volumes:
       - backend_uploads:/app/uploads
     depends_on:
@@ -23,8 +23,6 @@ services:
 
   mysql:
     image: mysql:8.0
-    ports:
-      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: keep_pledge
@@ -41,15 +39,13 @@ services:
 
   redis:
     image: redis:7-alpine
-    ports:
-      - "6379:6379"
 
   frontend:
     build:
       context: ..
       dockerfile: deploy/Dockerfile.frontend
     ports:
-      - "3000:80"
+      - "80:80"
     depends_on:
       - backend
 
