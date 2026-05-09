@@ -17,7 +17,7 @@
             username: ${{ secrets.ECS_USER }}
             key: ${{ secrets.ECS_SSH_KEY }}
             script: |
-              cd /opt/keep-pledge
+              cd /opt/Keep-pledge
               git pull
               cd deploy
               docker compose up --build -d
