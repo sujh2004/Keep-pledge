@@ -1,9 +1,10 @@
- name: Deploy to Aliyun ECS
+name: Deploy to Aliyun ECS
 
-  on:
+  "on":
     push:
       branches:
         - main
+    workflow_dispatch:
 
   jobs:
     deploy:
